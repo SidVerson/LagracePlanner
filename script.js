@@ -345,7 +345,7 @@ eventsContainer.addEventListener("click", (e) => {
         e.target.classList.remove('active')
         localStorage.setItem('Active', false)
       }
-      // updateEvents(activeDay);
+      
     
   }
 });
