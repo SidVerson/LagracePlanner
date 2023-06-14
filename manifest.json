@@ -3,16 +3,13 @@
     "display": "standalone",
     "name": "Lagrace планер",
     "orientation": "portrait",
-    "scope": "/",
     "short_name": "Планер",
-    "start_url": "/",
+    "start_url": ".",
     "theme_color": "#8c7561",
-    "categories": ["productivity"],
-    "screenshots": [],
     "icons": [
         {
             "src": "windows11/SmallTile.scale-100.png",
-            "sizes": "71x71"
+            "sizes": "any"
         },
         {
             "src": "windows11/SmallTile.scale-125.png",
@@ -457,14 +454,6 @@
         {
             "src": "ios/1024.png",
             "sizes": "1024x1024"
-        }
-    ],
-
-    "shortcuts": [
-        {
-            "name": "main",
-            "url": "/",
-            "description": "main"
         }
     ],
     "description": "Планер для ноготочков",
