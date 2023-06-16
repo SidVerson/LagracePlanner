@@ -44,7 +44,7 @@ const months = [
     'Март',
     'Апрель',
     'Май',
-    'Июньчик',
+    'Июнь',
     'Июль',
     'Август',
     'Сентябрь',
@@ -71,6 +71,7 @@ const months = [
 //   },
 // ];
 
+location.reload()
 const eventsArr = []
 getEvents()
 console.log(eventsArr)
