@@ -64,7 +64,7 @@
             <input id="timeTo" readonly type="text" placeholder="Время с" class="event-time-from" />
           </div>
           <div class="add-event-input">
-            <input type="text" placeholder="Время до" class="event-time-to" />
+            <input type="text" readonly id="timePast" placeholder="Время до" class="event-time-to" />
           </div>
           <div class="add-event-input">
             <input type="text" placeholder="Цена" class="event-price" />
@@ -91,8 +91,8 @@
     <input type="text" id="editTitleInput" placeholder="Заголовок">
     <input type="text" id="editPriceInput" placeholder="Цена">
     <input type="text" id="editCommentInput" placeholder="Комментарий">
-    <input type="text" id="editStartTimeInput" placeholder="Начальное время">
-    <input type="text" id="editEndTimeInput" placeholder="Конечное время">
+    <input type="text" id="editStartTimeInput" readonly placeholder="Начальное время">
+    <input type="text" id="editEndTimeInput" readonly placeholder="Конечное время">
     <button id="editSaveButton">Сохранить</button>
     <button id="editCancelButton">Отмена</button>
   </div>

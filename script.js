@@ -883,5 +883,66 @@ activateButton.addEventListener('click', function () {
 var rd = new Rolldate({
     el: '#timeTo',
     format: 'hh:mm',
+    lang: {
+        title: 'Выбери время',
+        cancel: 'Отмена',
+        confirm: 'Подтвердить',
+        year: '',
+        month: '',
+        day: '',
+        hour: ' часов',
+        min: ' минут',
+        sec: '',
+    },
+    
 })
+var rd = new Rolldate({
+    el: '#timePast',
+    format: 'hh:mm',
+    lang: {
+        title: 'Выбери время',
+        cancel: 'Отмена',
+        confirm: 'Подтвердить',
+        year: '',
+        month: '',
+        day: '',
+        hour: ' часов',
+        min: ' минут',
+        sec: '',
+    },
+})
+
+var rd = new Rolldate({
+    el: '#editStartTimeInput',
+    format: 'hh:mm',
+    lang: {
+        title: 'Выбери время',
+        cancel: 'Отмена',
+        confirm: 'Подтвердить',
+        year: '',
+        month: '',
+        day: '',
+        hour: ' часов',
+        min: ' минут',
+        sec: '',
+    },
+})
+
+var rd = new Rolldate({
+    el: '#editEndTimeInput',
+    format: 'hh:mm',
+    lang: {
+        title: 'Выбери время',
+        cancel: 'Отмена',
+        confirm: 'Подтвердить',
+        year: '',
+        month: '',
+        day: '',
+        hour: ' часов',
+        min: ' минут',
+        sec: '',
+    },
+})
+
+
 
