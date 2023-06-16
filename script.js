@@ -798,7 +798,11 @@ editButton.addEventListener('click', function (event) {
             editStartTimeInput.value = startTime
             editEndTimeInput.value = endTime
 
-            // Обработчик события для кнопки сохранения изменений
+            
+        }
+    }
+})
+// Обработчик события для кнопки сохранения изменений
             editSaveButton.addEventListener('click', function () {
                 // Получение текущих значений из полей меню редактирования
                 const editedTitle = editTitleInput.value
@@ -842,10 +846,6 @@ editButton.addEventListener('click', function (event) {
                 // Обновление отображения событий
                 updateEvents(activeDay)
             })
-        }
-    }
-    updateEvents(activeDay)
-})
 
 editCancelButton.addEventListener('click', function (event) {
     editMenu.style.display = 'none'
