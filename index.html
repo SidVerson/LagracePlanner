@@ -99,8 +99,17 @@
     </div>
     <div id="contextMenu" class="context-menu">
       <button id="deleteButton">Удалить</button>
-      <button id="editButton">Редактировать</button>
+      <button class="edit-button" id="editButton">Редактировать</buttonс>
       <button id="activateButton">Активировать</button>
+    </div>
+    <div id="editMenu" >
+      <input type="text" id="editTitleInput" placeholder="Заголовок">
+      <input type="text" id="editPriceInput" placeholder="Цена">
+      <input type="text" id="editCommentInput" placeholder="Комментарий">
+      <input type="text" id="editStartTimeInput" placeholder="Начальное время">
+      <input type="text" id="editEndTimeInput" placeholder="Конечное время">
+      <button id="editSaveButton">Сохранить</button>
+      <button id="editCancelButton">Отмена</button>
     </div>
     <script>
       if (typeof navigator.serviceWorker !== 'undefined') {

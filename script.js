@@ -24,6 +24,15 @@ var deleteButton = document.getElementById('deleteButton')
 var editButton = document.getElementById('editButton')
 var activateButton = document.getElementById('activateButton')
 
+const editMenu = document.getElementById('editMenu')
+const editTitleInput = document.getElementById('editTitleInput')
+const editPriceInput = document.getElementById('editPriceInput')
+const editCommentInput = document.getElementById('editCommentInput')
+const editStartTimeInput = document.getElementById('editStartTimeInput')
+const editEndTimeInput = document.getElementById('editEndTimeInput')
+const editSaveButton = document.getElementById('editSaveButton')
+const editCancelButton = document.getElementById('editCancelButton')
+
 let today = new Date()
 let activeDay
 let month = today.getMonth()
@@ -313,10 +322,10 @@ function updateEvents(date) {
                 <div class="event-time">
                   <span class="event-time">${event.time}</span>
                 </div>
-                <div class="event-time">
+                <div class="event-time" id='event-price'>
                   <span class="event-time">${event.price} BYN</span>
                 </div>
-                <div class="event-time">
+                <div class="event-time" id='event-comment'>
                   <span class="event-time">${event.comment}</span>
                 </div>
                 
@@ -645,56 +654,55 @@ let eventTitle
 
 // Функция для отображения контекстного меню
 function showContextMenu(event) {
-  if (event.target.classList.contains('event')) {
-    eventTitle = event.target.children[0].children[0].innerHTML;
-    console.log(event.target);
-    console.log(eventTitle);
+    if (event.target.classList.contains('event')) {
+        eventTitle = event.target.children[0].children[0].innerHTML
+        console.log(event.target)
+        console.log(eventTitle)
 
-    const eventToUpdate = eventsArr.find((event) => {
-      return (
-        event.day === activeDay &&
-        event.month === month + 1 &&
-        event.year === year
-      );
-    });
+        const eventToUpdate = eventsArr.find((event) => {
+            return (
+                event.day === activeDay &&
+                event.month === month + 1 &&
+                event.year === year
+            )
+        })
 
-    if (eventToUpdate) {
-      const itemToUpdate = eventToUpdate.events.find((item) => {
-        return item.title === eventTitle;
-      });
+        if (eventToUpdate) {
+            const itemToUpdate = eventToUpdate.events.find((item) => {
+                return item.title === eventTitle
+            })
 
-      if (itemToUpdate) {
-        if (itemToUpdate.confirmed === 'confirmed') {
-          activateButton.textContent = 'Деактивировать';
-        } else {
-          activateButton.textContent = 'Активировать';
+            if (itemToUpdate) {
+                if (itemToUpdate.confirmed === 'confirmed') {
+                    activateButton.textContent = 'Деактивировать'
+                } else {
+                    activateButton.textContent = 'Активировать'
+                }
+                console.log('Updated:', itemToUpdate)
+            }
         }
-        console.log('Updated:', itemToUpdate);
-      }
+        editMenu.style.display = 'none'
+        contextMenu.style.display = 'block'
+        contextMenu.style.left = event.pageX + 'px'
+        contextMenu.style.top = event.pageY + 'px'
+
+        event.preventDefault()
+        event.stopPropagation()
+    } else {
+        hideContextMenu()
     }
-
-    contextMenu.style.display = 'block';
-    contextMenu.style.left = event.pageX + 'px';
-    contextMenu.style.top = event.pageY + 'px';
-
-    event.preventDefault();
-    event.stopPropagation();
-  } else {
-    hideContextMenu();
-  }
 }
 
 // Функция для скрытия контекстного меню
 function hideContextMenu() {
-  contextMenu.style.display = 'none';
+    contextMenu.style.display = 'none'
 }
 
 // Обработчик события для вызова контекстного меню
-eventsContainer.addEventListener('click', showContextMenu);
+eventsContainer.addEventListener('click', showContextMenu)
 
 // Обработчик события для скрытия контекстного меню при клике вне него
-document.addEventListener('click', hideContextMenu);
-
+document.addEventListener('click', hideContextMenu)
 
 // Обработчики событий для кнопок контекстного меню
 deleteButton.addEventListener('click', function () {
@@ -726,12 +734,122 @@ deleteButton.addEventListener('click', function () {
     alert("Вы выбрали опцию 'Удалить'")
 })
 
-editButton.addEventListener('click', function () {
-    // Действия при нажатии на кнопку "Редактировать"
-    alert("Вы выбрали опцию 'Редактировать'")
+// // Обработчик события для кнопки "Редактировать"
+// editButton.addEventListener('click', function () {
+//   hideContextMenu();
+
+//   const eventToUpdate = eventsArr.find((event) => {
+//     return (
+//       event.day === activeDay &&
+//       event.month === month + 1 &&
+//       event.year === year
+//     );
+//   });
+
+//   if (eventToUpdate) {
+//     const itemToUpdate = eventToUpdate.events.find((item) => {
+//       return item.title === eventTitle;
+//     });
+
+//     if (itemToUpdate) {
+//       const newTitle = prompt('Введите новое значение для заголовка', itemToUpdate.title);
+//       const newPrice = prompt('Введите новое значение для цены', itemToUpdate.price);
+//       const newComment = prompt('Введите новое значение для комментария', itemToUpdate.comment);
+//       const newStartTime = prompt('Введите новое значение для начального времени', itemToUpdate.startTime);
+//       const newEndTime = prompt('Введите новое значение для конечного времени', itemToUpdate.endTime);
+
+//       if (newTitle !== null && newPrice !== null && newComment !== null && newStartTime !== null && newEndTime !== null) {
+//         itemToUpdate.title = newTitle;
+//         itemToUpdate.price = newPrice;
+//         itemToUpdate.comment = newComment;
+//         itemToUpdate.startTime = newStartTime;
+//         itemToUpdate.endTime = newEndTime;
+//         itemToUpdate.time = newStartTime + ' - ' + newEndTime,
+//         console.log('Updated:', itemToUpdate)
+//       }
+//     }
+//   }
+//   updateEvents(activeDay)
+// });
+
+editButton.addEventListener('click', function (event) {
+    hideContextMenu()
+    editMenu.style.display = 'block'
+    editMenu.style.left = event.pageX + 'px'
+    editMenu.style.top = event.pageY + 'px'
+    const eventToUpdate = eventsArr.find((event) => {
+        return (
+            event.day === activeDay &&
+            event.month === month + 1 &&
+            event.year === year
+        )
+    })
+    if (eventToUpdate) {
+        const itemToUpdate = eventToUpdate.events.find((item) => {
+            return item.title === eventTitle
+        })
+
+        if (itemToUpdate) {
+            editTitleInput.value = itemToUpdate.title
+            editPriceInput.value = itemToUpdate.price
+            editCommentInput.value = itemToUpdate.comment
+            // Разделение значения времени на начальное и конечное
+            const [startTime, endTime] = itemToUpdate.time.split(' - ')
+            editStartTimeInput.value = startTime
+            editEndTimeInput.value = endTime
+
+            // Обработчик события для кнопки сохранения изменений
+            editSaveButton.addEventListener('click', function () {
+                // Получение текущих значений из полей меню редактирования
+                const editedTitle = editTitleInput.value
+                const editedPrice = editPriceInput.value
+                const editedComment = editCommentInput.value
+                const editedStartTime = editStartTimeInput.value
+                const editedEndTime = editEndTimeInput.value
+
+                // Обновление значений элемента в массиве
+                const eventToUpdate = eventsArr.find((event) => {
+                    return (
+                        event.day === activeDay &&
+                        event.month === month + 1 &&
+                        event.year === year
+                    )
+                })
+
+                if (eventToUpdate) {
+                    const itemToUpdate = eventToUpdate.events.find((item) => {
+                        return item.title === eventTitle
+                    })
+
+                    if (itemToUpdate) {
+                        itemToUpdate.title = editedTitle
+                        itemToUpdate.price = editedPrice
+                        itemToUpdate.comment = editedComment
+                        itemToUpdate.time = `${editedStartTime} - ${editedEndTime}`
+                    }
+                }
+
+                // Очистка полей меню редактирования
+                editTitleInput.value = ''
+                editPriceInput.value = ''
+                editCommentInput.value = ''
+                editStartTimeInput.value = ''
+                editEndTimeInput.value = ''
+
+                // Скрытие меню редактирования
+                editMenu.style.display = 'none'
+
+                // Обновление отображения событий
+                updateEvents(activeDay)
+            })
+        }
+    }
+    updateEvents(activeDay)
 })
 
-
+editCancelButton.addEventListener('click', function (event) {
+    editMenu.style.display = 'none'
+})
 
 activateButton.addEventListener('click', function () {
     const eventToUpdate = eventsArr.find((event) => {
@@ -758,12 +876,6 @@ activateButton.addEventListener('click', function () {
         }
     }
 
-    
-
     updateEvents(activeDay)
     alert("Вы выбрали опцию 'Активировать'")
 })
-
-
-
-
