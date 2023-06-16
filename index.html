@@ -83,18 +83,18 @@
     </button>
   </div>
   <div id="contextMenu" class="context-menu">
-    <button id="deleteButton">Удалить</button>
-    <button class="edit-button" id="editButton">Редактировать</buttonс>
-      <button id="activateButton">Активировать</button>
+    <button class="deleteButton crudButton" id="deleteButton">Удалить</button>
+    <button class="edit-button crudButton" id="editButton">Редактировать</buttonс>
+      <button class="activateButton crudButton" id="activateButton">Активировать</button>
   </div>
-  <div id="editMenu">
-    <input type="text" id="editTitleInput" placeholder="Заголовок">
-    <input type="text" id="editPriceInput" placeholder="Цена">
-    <input type="text" id="editCommentInput" placeholder="Комментарий">
-    <input type="text" id="editStartTimeInput" readonly placeholder="Начальное время">
-    <input type="text" id="editEndTimeInput" readonly placeholder="Конечное время">
-    <button id="editSaveButton">Сохранить</button>
-    <button id="editCancelButton">Отмена</button>
+  <div class="editMenu" id="editMenu">
+    <input class="editTitle" type="text" id="editTitleInput" placeholder="Заголовок">
+    <input class="editPrice" type="text" id="editPriceInput" placeholder="Цена">
+    <input class="editComment" type="text" id="editCommentInput" placeholder="Комментарий">
+    <input class="editStartTime" type="text" id="editStartTimeInput" readonly placeholder="Начальное время">
+    <input class="editEndTime" type="text" id="editEndTimeInput" readonly placeholder="Конечное время">
+    <button class="editSaveButton" id="editSaveButton">Сохранить</button>
+    <button class="editCancelButton" id="editCancelButton">Отмена</button>
   </div>
   <script>
     if (typeof navigator.serviceWorker !== 'undefined') {

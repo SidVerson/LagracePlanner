@@ -18,6 +18,7 @@ const calendar = document.querySelector('.calendar'),
     addEventPrice = document.querySelector('.event-price'),
     addEventComment = document.querySelector('.event-comment'),
     addEventSubmit = document.querySelector('.add-event-btn ')
+    container = document.querySelector('.container')
 
 var contextMenu = document.getElementById('contextMenu')
 var deleteButton = document.getElementById('deleteButton')
@@ -53,28 +54,12 @@ const months = [
     'Декабрь',
 ]
 
-// const eventsArr = [
-//   {
-//     day: 13,
-//     month: 11,
-//     year: 2022,
-//     events: [
-//       {
-//         title: "Event 1 lorem ipsun dolar sit genfa tersd dsad ",
-//         time: "10:00 AM",
-//       },
-//       {
-//         title: "Event 2",
-//         time: "11:00 AM",
-//       },
-//     ],
-//   },
-// ];
 const eventsArr = []
 getEvents()
 console.log(eventsArr)
 
-//function to add days in days with class day and prev-date next-date on previous month and next month days and active on today
+
+// function to add days in days with class day and prev-date next-date on previous month and next month days and active on today
 function initCalendar() {
     const firstDay = new Date(year, month, 1)
     const lastDay = new Date(year, month + 1, 0)
@@ -134,7 +119,7 @@ function initCalendar() {
     addListner()
 }
 
-//function to add month and year on prev and next button
+// function to add month and year on prev and next button
 function prevMonth() {
     month--
     if (month < 0) {
@@ -206,6 +191,10 @@ function addListner() {
         })
     })
 }
+
+
+
+
 
 todayBtn.addEventListener('click', () => {
     today = new Date()
@@ -353,11 +342,7 @@ addEventCloseBtn.addEventListener('click', () => {
     addEventWrapper.classList.remove('active')
 })
 
-// document.addEventListener('click', (e) => {
-//     if (e.target !== addEventBtn && !addEventWrapper.contains(e.target)) {
-//         addEventWrapper.classList.remove('active')
-//     }
-// })
+
 
 //allow 50 chars in eventtitle
 addEventTitle.addEventListener('input', (e) => {
@@ -394,7 +379,7 @@ addEventSubmit.addEventListener('click', () => {
     const eventComment = addEventComment.value
     const eventConfirmed = 'aboba'
     if (eventTitle === '' || eventTimeFrom === '' || eventTimeTo === '') {
-        alert('Please fill all the fields')
+        alert('Заполнила не все поля')
         return
     }
 
@@ -409,7 +394,7 @@ addEventSubmit.addEventListener('click', () => {
         timeToArr[0] > 23 ||
         timeToArr[1] > 59
     ) {
-        alert('Invalid Time Format')
+        alert('Неправильный формат времени')
         return
     }
 
@@ -432,7 +417,7 @@ addEventSubmit.addEventListener('click', () => {
         }
     })
     if (eventExist) {
-        alert('Event already added')
+        alert('Уже есть такой')
         return
     }
     const newEvent = {
@@ -482,39 +467,7 @@ addEventSubmit.addEventListener('click', () => {
     }
 })
 
-// //function to delete event when clicked on event
-// eventsContainer.addEventListener('contextmenu', (e) => {
-//     e.preventDefault()
-//     if (e.target.classList.contains('event')) {
-//         if (confirm('Are you sure you want to delete this event?')) {
-//             const eventTitle = e.target.children[0].children[0].innerHTML
-//             eventsArr.forEach((event) => {
-//                 if (
-//                     event.day === activeDay &&
-//                     event.month === month + 1 &&
-//                     event.year === year
-//                 ) {
-//                     event.events.forEach((item, index) => {
-//                         if (item.title === eventTitle) {
-//                             event.events.splice(index, 1)
-//                         }
-//                     })
-//                     //if no events left in a day then remove that day from eventsArr
-//                     if (event.events.length === 0) {
-//                         eventsArr.splice(eventsArr.indexOf(event), 1)
-//                         //remove event class from day
-//                         const activeDayEl =
-//                             document.querySelector('.day.active')
-//                         if (activeDayEl.classList.contains('event')) {
-//                             activeDayEl.classList.remove('event')
-//                         }
-//                     }
-//                 }
-//             })
-//             updateEvents(activeDay)
-//         }
-//     }
-// })
+
 
 //function to save events in local storage
 function saveEvents() {
@@ -530,124 +483,12 @@ function getEvents() {
     eventsArr.push(...JSON.parse(localStorage.getItem('events')))
 }
 
-// function convertTime(time) {
-//   //convert time to 24 hour format
-//   let timeArr = time.split(":");
-//   let timeHour = timeArr[0];
-//   let timeMin = timeArr[1];
-//   let timeFormat = timeHour >= 12 ? "PM" : "AM";
-//   timeHour = timeHour % 12 || 12;
-//   time = timeHour + ":" + timeMin + " " + timeFormat;
-//   return time;
-// }
 
-function updateTotal() {
-    const currentDate = new Date() // Текущая дата
-    const currentMonth = currentDate.getMonth() // Текущий месяц
-    const currentYear = currentDate.getFullYear() // Текущий год
 
-    let totalEarnings = 0
 
-    for (const event of eventsArr) {
-        const eventDate = new Date(event.year, event.month - 1, event.day)
-        const eventMonth = eventDate.getMonth()
-        const eventYear = eventDate.getFullYear()
 
-        if (eventMonth === currentMonth && eventYear === currentYear) {
-            for (const eventItem of event.events) {
-                const eventPrice = parseFloat(eventItem.price)
-                totalEarnings += eventPrice
-            }
-        }
-    }
 
-    const totalDiv = `
-  <div class='total'>
-  <p>Общий заработок ${totalEarnings}</p>
-  </div>
-  `
 
-    // Container.innerHTML += totalDiv
-}
-
-updateTotal()
-
-// Функция для отправки комбинированного уведомления через Web Push
-function sendCombinedWebPushNotification(events) {
-    // Проверяем, поддерживает ли браузер Web Push уведомления
-    if (!('serviceWorker' in navigator) || !('PushManager' in window)) {
-        console.log('Web Push уведомления не поддерживаются в данном браузере.')
-        return
-    }
-
-    // Проверяем, есть ли разрешение на отправку уведомлений
-    Notification.requestPermission().then((permission) => {
-        if (permission !== 'granted') {
-            console.log('Разрешение на отправку уведомлений не получено.')
-            return
-        }
-
-        // Регистрируем сервис-воркер для обработки уведомлений
-        navigator.serviceWorker
-            .register('sw.js')
-            .then((registration) => {
-                // Отправляем комбинированное уведомление
-                registration.showNotification('Новые события', {
-                    body: buildCombinedNotificationBody(events),
-                    icon: 'ios/1024.png',
-                    // ... дополнительные настройки уведомления
-                })
-            })
-            .catch((error) => {
-                console.log('Ошибка при регистрации сервис-воркера:', error)
-            })
-    })
-}
-
-// Функция для построения текста комбинированного уведомления
-function buildCombinedNotificationBody(events) {
-    let notificationBody = ''
-
-    events.forEach((event) => {
-        notificationBody += `Клиент "${event.title}" завтра\n`
-        // ... добавьте дополнительные данные события, если нужно
-    })
-
-    return notificationBody
-}
-
-// Функция для проверки событий и отправки уведомлений за день до наступления
-function checkEventsForNotification(eventsArr) {
-    const currentDate = new Date() // Текущая дата
-    const eventsToSend = [] // Массив для хранения событий, подходящих для отправки
-
-    for (const eventObj of eventsArr) {
-        const eventDate = new Date(
-            eventObj.year,
-            eventObj.month - 1,
-            eventObj.day
-        )
-
-        for (const event of eventObj.events) {
-            // Вычисляем разницу во времени между текущей датой и датой события
-            const timeDiff = eventDate.getTime() - currentDate.getTime()
-            const oneDay = 24 * 60 * 60 * 1000 // Количество миллисекунд в одном дне
-
-            // Если разница во времени составляет примерно один день, добавляем событие в массив
-            if (timeDiff > 0 && timeDiff <= oneDay) {
-                eventsToSend.push(event)
-            }
-        }
-    }
-
-    // Если есть события для отправки, вызываем функцию для комбинированного уведомления
-    if (eventsToSend.length > 0) {
-        sendCombinedWebPushNotification(eventsToSend)
-    }
-}
-
-// Вызываем функцию проверки событий и отправки уведомлений
-checkEventsForNotification(eventsArr)
 
 let eventTitle
 
@@ -673,17 +514,17 @@ function showContextMenu(event) {
 
             if (itemToUpdate) {
                 if (itemToUpdate.confirmed === 'confirmed') {
-                    activateButton.textContent = 'Деактивировать'
+                    activateButton.textContent = 'Убрать'
                 } else {
-                    activateButton.textContent = 'Активировать'
+                    activateButton.textContent = 'Подтвердить'
                 }
                 console.log('Updated:', itemToUpdate)
             }
         }
         editMenu.style.display = 'none'
-        contextMenu.style.display = 'block'
-        contextMenu.style.left = event.pageX + 'px'
-        contextMenu.style.top = event.pageY + 'px'
+        contextMenu.style.display = 'flex'
+        contextMenu.style.left = event.pageX  + 'px'
+        contextMenu.style.top = event.pageY - 100 + 'px'
 
         event.preventDefault()
         event.stopPropagation()
@@ -730,52 +571,31 @@ deleteButton.addEventListener('click', function () {
         }
     })
     updateEvents(activeDay)
-    alert("Вы выбрали опцию 'Удалить'")
 })
 
-// // Обработчик события для кнопки "Редактировать"
-// editButton.addEventListener('click', function () {
-//   hideContextMenu();
-
-//   const eventToUpdate = eventsArr.find((event) => {
-//     return (
-//       event.day === activeDay &&
-//       event.month === month + 1 &&
-//       event.year === year
-//     );
-//   });
-
-//   if (eventToUpdate) {
-//     const itemToUpdate = eventToUpdate.events.find((item) => {
-//       return item.title === eventTitle;
-//     });
-
-//     if (itemToUpdate) {
-//       const newTitle = prompt('Введите новое значение для заголовка', itemToUpdate.title);
-//       const newPrice = prompt('Введите новое значение для цены', itemToUpdate.price);
-//       const newComment = prompt('Введите новое значение для комментария', itemToUpdate.comment);
-//       const newStartTime = prompt('Введите новое значение для начального времени', itemToUpdate.startTime);
-//       const newEndTime = prompt('Введите новое значение для конечного времени', itemToUpdate.endTime);
-
-//       if (newTitle !== null && newPrice !== null && newComment !== null && newStartTime !== null && newEndTime !== null) {
-//         itemToUpdate.title = newTitle;
-//         itemToUpdate.price = newPrice;
-//         itemToUpdate.comment = newComment;
-//         itemToUpdate.startTime = newStartTime;
-//         itemToUpdate.endTime = newEndTime;
-//         itemToUpdate.time = newStartTime + ' - ' + newEndTime,
-//         console.log('Updated:', itemToUpdate)
-//       }
-//     }
-//   }
-//   updateEvents(activeDay)
-// });
-
+let backdrop
 editButton.addEventListener('click', function (event) {
     hideContextMenu()
+    // Создание элемента для размытого фона
+    backdrop = document.createElement('div')
+    backdrop.classList.add('backdrop')
+    document.body.appendChild(backdrop)
+
+    // Применение стилей для размытого фона
+    backdrop.style.position = 'fixed'
+    backdrop.style.top = '0'
+    backdrop.style.left = '0'
+    backdrop.style.width = '100%'
+    backdrop.style.height = '100%'
+    backdrop.style.zIndex = '999'
+    backdrop.style.backdropFilter = 'blur(5px)'
+    backdrop.style.backgroundColor = 'rgba(0, 0, 0, 0.5)'
+    editMenu.style.zIndex = '1000'
     editMenu.style.display = 'block'
-    editMenu.style.left = event.pageX + 'px'
-    editMenu.style.top = event.pageY + 'px'
+    editMenu.style.left = '50%'
+    editMenu.style.top = '50%'
+    editMenu.style.transform = 'translate(-50%, -50%)'
+
     const eventToUpdate = eventsArr.find((event) => {
         return (
             event.day === activeDay &&
@@ -796,8 +616,6 @@ editButton.addEventListener('click', function (event) {
             const [startTime, endTime] = itemToUpdate.time.split(' - ')
             editStartTimeInput.value = startTime
             editEndTimeInput.value = endTime
-
-            
         }
     }
 })
@@ -841,6 +659,7 @@ editButton.addEventListener('click', function (event) {
 
                 // Скрытие меню редактирования
                 editMenu.style.display = 'none'
+                backdrop.remove()
 
                 // Обновление отображения событий
                 updateEvents(activeDay)
@@ -848,6 +667,7 @@ editButton.addEventListener('click', function (event) {
 
 editCancelButton.addEventListener('click', function (event) {
     editMenu.style.display = 'none'
+    backdrop.remove()
 })
 
 activateButton.addEventListener('click', function () {
@@ -876,7 +696,6 @@ activateButton.addEventListener('click', function () {
     }
 
     updateEvents(activeDay)
-    alert("Вы выбрали опцию 'Активировать'")
 })
 
 var rd = new Rolldate({

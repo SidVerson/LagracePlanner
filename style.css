@@ -627,15 +627,95 @@ body {
 .context-menu {
   display: none;
   position: absolute;
-  background-color: #f1f1f1;
-  border: 1px solid #ccc;
-  padding: 8px;
+  background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 8px 0;
+    z-index: 9999;
+    flex-direction: column;
 }
 
-#editMenu {
+.crudButton {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  text-align: left;
+  border: none;
+  background: none;
+  color: #252525;
+  
+  /* Цвет кнопок в стиле iOS */
+}
+
+
+
+.crudButton:hover {
+  background-color: #f2f2f2;
+  /* Цвет при наведении курсора в стиле iOS */
+}
+
+.crudButton:focus {
+  outline: none;
+  background-color: #f2f2f2;
+  /* Цвет при фокусировке в стиле iOS */
+}
+
+.crudButton:first-child {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.crudButton:last-child {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+
+
+.editMenu {
   display: none;
   position: absolute;
-  background-color: #f1f1f1;
-  border: 1px solid #ccc;
+  background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+}
+.editTitle,
+.editPrice,
+.editComment,
+.editStartTime,
+.editEndTime {
+  background-color: #f5f5f5;
+  border: none;
+  border-radius: 6px;
   padding: 8px;
+  margin-bottom: 12px;
+  font-size: 16px;
+  color: #333333;
+}
+
+.editStartTime,
+.editEndTime {
+  cursor: pointer;
+}
+
+.editSaveButton,
+.editCancelButton {
+  background-color: #007aff;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.editSaveButton {
+  margin-right: 8px;
+}
+
+.editCancelButton {
+  background-color: transparent;
+  color: #007aff;
 }
