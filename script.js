@@ -70,8 +70,6 @@ const months = [
 //     ],
 //   },
 // ];
-
-location.reload()
 const eventsArr = []
 getEvents()
 console.log(eventsArr)
