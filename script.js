@@ -354,11 +354,11 @@ addEventCloseBtn.addEventListener('click', () => {
     addEventWrapper.classList.remove('active')
 })
 
-document.addEventListener('click', (e) => {
-    if (e.target !== addEventBtn && !addEventWrapper.contains(e.target)) {
-        addEventWrapper.classList.remove('active')
-    }
-})
+// document.addEventListener('click', (e) => {
+//     if (e.target !== addEventBtn && !addEventWrapper.contains(e.target)) {
+//         addEventWrapper.classList.remove('active')
+//     }
+// })
 
 //allow 50 chars in eventtitle
 addEventTitle.addEventListener('input', (e) => {
@@ -879,3 +879,9 @@ activateButton.addEventListener('click', function () {
     updateEvents(activeDay)
     alert("Вы выбрали опцию 'Активировать'")
 })
+
+var rd = new Rolldate({
+    el: '#timeTo',
+    format: 'hh:mm',
+})
+
