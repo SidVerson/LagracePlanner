@@ -100,23 +100,9 @@
     if (typeof navigator.serviceWorker !== 'undefined') {
       navigator.serviceWorker.register('sw.js')
     }
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('service-worker.js').then((registration) => {
-          registration.addEventListener('updatefound', () => {
-            // Обнаружено обновление сервисного работника
-            const installingWorker = registration.installing
-            installingWorker.addEventListener('statechange', () => {
-              if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                // Сервисный работник установлен и имеется активный работник
-                // Можно выполнить логику для обработки обновлений
-                console.log('New version available. Refresh the page for updates.')
-              }
-            })
-          })
-        })
-      }
+   
   </script>
-  <script src="rolldate.min.js"></script>
+  <!-- <script src="rolldate.min.js"></script> -->
   <script src="script.js"></script>
 </body>
 
