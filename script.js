@@ -66,14 +66,15 @@ function initCalendar() {
     const prevLastDay = new Date(year, month, 0)
     const prevDays = prevLastDay.getDate()
     const lastDate = lastDay.getDate()
-    const day = firstDay.getDay()
+    const day = ((firstDay.getDay() + 6) % 7) + 1
+
     const nextDays = 7 - lastDay.getDay() - 1
 
     date.innerHTML = months[month] + ' ' + year
 
     let days = ''
 
-    for (let x = day; x > 0; x--) {
+    for (let x = day - 1; x > 0; x--) {
         days += `<div class="day prev-date">${prevDays - x + 1}</div>`
     }
 
