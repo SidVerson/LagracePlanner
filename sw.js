@@ -18,8 +18,3 @@ workbox.routing.registerRoute(
         cacheName: CACHE,
     })
 )
-
-
-
-
-

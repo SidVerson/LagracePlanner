@@ -18,7 +18,7 @@ const calendar = document.querySelector('.calendar'),
     addEventPrice = document.querySelector('.event-price'),
     addEventComment = document.querySelector('.event-comment'),
     addEventSubmit = document.querySelector('.add-event-btn ')
-    container = document.querySelector('.container')
+container = document.querySelector('.container')
 
 var contextMenu = document.getElementById('contextMenu')
 var deleteButton = document.getElementById('deleteButton')
@@ -57,7 +57,6 @@ const months = [
 const eventsArr = []
 getEvents()
 console.log(eventsArr)
-
 
 // function to add days in days with class day and prev-date next-date on previous month and next month days and active on today
 function initCalendar() {
@@ -192,10 +191,6 @@ function addListner() {
         })
     })
 }
-
-
-
-
 
 todayBtn.addEventListener('click', () => {
     today = new Date()
@@ -343,8 +338,6 @@ addEventCloseBtn.addEventListener('click', () => {
     addEventWrapper.classList.remove('active')
 })
 
-
-
 //allow 50 chars in eventtitle
 addEventTitle.addEventListener('input', (e) => {
     addEventTitle.value = addEventTitle.value.slice(0, 60)
@@ -468,8 +461,6 @@ addEventSubmit.addEventListener('click', () => {
     }
 })
 
-
-
 //function to save events in local storage
 function saveEvents() {
     localStorage.setItem('events', JSON.stringify(eventsArr))
@@ -483,13 +474,6 @@ function getEvents() {
     }
     eventsArr.push(...JSON.parse(localStorage.getItem('events')))
 }
-
-
-
-
-
-
-
 
 let eventTitle
 
@@ -524,7 +508,7 @@ function showContextMenu(event) {
         }
         editMenu.style.display = 'none'
         contextMenu.style.display = 'flex'
-        contextMenu.style.left = event.pageX  + 'px'
+        contextMenu.style.left = event.pageX + 'px'
         contextMenu.style.top = event.pageY - 100 + 'px'
 
         event.preventDefault()
@@ -621,50 +605,50 @@ editButton.addEventListener('click', function (event) {
     }
 })
 // Обработчик события для кнопки сохранения изменений
-            editSaveButton.addEventListener('click', function () {
-                // Получение текущих значений из полей меню редактирования
-                const editedTitle = editTitleInput.value
-                const editedPrice = editPriceInput.value
-                const editedComment = editCommentInput.value
-                const editedStartTime = editStartTimeInput.value
-                const editedEndTime = editEndTimeInput.value
+editSaveButton.addEventListener('click', function () {
+    // Получение текущих значений из полей меню редактирования
+    const editedTitle = editTitleInput.value
+    const editedPrice = editPriceInput.value
+    const editedComment = editCommentInput.value
+    const editedStartTime = editStartTimeInput.value
+    const editedEndTime = editEndTimeInput.value
 
-                // Обновление значений элемента в массиве
-                const eventToUpdate = eventsArr.find((event) => {
-                    return (
-                        event.day === activeDay &&
-                        event.month === month + 1 &&
-                        event.year === year
-                    )
-                })
+    // Обновление значений элемента в массиве
+    const eventToUpdate = eventsArr.find((event) => {
+        return (
+            event.day === activeDay &&
+            event.month === month + 1 &&
+            event.year === year
+        )
+    })
 
-                if (eventToUpdate) {
-                    const itemToUpdate = eventToUpdate.events.find((item) => {
-                        return item.title === eventTitle
-                    })
+    if (eventToUpdate) {
+        const itemToUpdate = eventToUpdate.events.find((item) => {
+            return item.title === eventTitle
+        })
 
-                    if (itemToUpdate) {
-                        itemToUpdate.title = editedTitle
-                        itemToUpdate.price = editedPrice
-                        itemToUpdate.comment = editedComment
-                        itemToUpdate.time = `${editedStartTime} - ${editedEndTime}`
-                    }
-                }
+        if (itemToUpdate) {
+            itemToUpdate.title = editedTitle
+            itemToUpdate.price = editedPrice
+            itemToUpdate.comment = editedComment
+            itemToUpdate.time = `${editedStartTime} - ${editedEndTime}`
+        }
+    }
 
-                // Очистка полей меню редактирования
-                editTitleInput.value = ''
-                editPriceInput.value = ''
-                editCommentInput.value = ''
-                editStartTimeInput.value = ''
-                editEndTimeInput.value = ''
+    // Очистка полей меню редактирования
+    editTitleInput.value = ''
+    editPriceInput.value = ''
+    editCommentInput.value = ''
+    editStartTimeInput.value = ''
+    editEndTimeInput.value = ''
 
-                // Скрытие меню редактирования
-                editMenu.style.display = 'none'
-                backdrop.remove()
+    // Скрытие меню редактирования
+    editMenu.style.display = 'none'
+    backdrop.remove()
 
-                // Обновление отображения событий
-                updateEvents(activeDay)
-            })
+    // Обновление отображения событий
+    updateEvents(activeDay)
+})
 
 editCancelButton.addEventListener('click', function (event) {
     editMenu.style.display = 'none'
@@ -713,7 +697,6 @@ var rd = new Rolldate({
         min: ' минут',
         sec: '',
     },
-    
 })
 var rd = new Rolldate({
     el: '#timePast',
@@ -762,6 +745,3 @@ var rd = new Rolldate({
         sec: '',
     },
 })
-
-
-
