@@ -321,6 +321,7 @@ function updateEvents(date) {
 
     if (events === '') {
         events = `<div class="no-event">
+        <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_ZSqxIVbhtx.json"  background="transparent"  speed="1"  style="width: 300px; height: 200px;"  loop  autoplay></lottie-player>
             <h3>Нет записей</h3>
         </div>`
     }
